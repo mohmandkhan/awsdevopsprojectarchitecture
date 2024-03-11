@@ -1,0 +1,29 @@
+// add new user
+adduser fsadmin
+ 
+// make new user admin
+usermod -aG sudo fsadmin
+// add admin to sudo users list
+sudo su fsadmin
+
+Data that need to be set up in user data while launching instance in order to install code deploy agent in ec2 instance on boot
+#!/bin/bash
+sudo apt-get update -y 
+sudo apt-get install ruby -y
+sudo apt-get install wget -y
+cd /home/ubuntu
+wget https://aws-codedeploy-us-west-2.s3.us-west-2.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+
+
+AWSEC2S3ReadOnlyAccess
+sudo service codedeploy-agent status
+
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local
